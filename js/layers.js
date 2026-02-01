@@ -15,6 +15,9 @@ addLayer("p", {
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+		if (hasUpgrade('p', 21)) {mult.times(upgradeEffect('p', 21))}
+		if (hasUpgrade('p', 23)) {mult.times(upgradeEffect('p', 23))}
+		if (hasUpgrade('p', 31)) {mult.times(upgradeEffect('p', 31))}
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -27,7 +30,7 @@ addLayer("p", {
     layerShown(){return true},
 	upgrades: {
 		11: {
-			name: "Speed Up",
+			title: "Speed Up",
 			description: "Point generation *1.2.",
 			cost: new Decimal(1),
 			effect() {
@@ -37,7 +40,7 @@ addLayer("p", {
 			}
 		},
 		12: {
-			name: "Prestige Power",
+			title: "Prestige Power",
 			description: "Prestige points boost point generation.",
 			cost: new Decimal(1),
 			effect() {
@@ -47,7 +50,7 @@ addLayer("p", {
 			}
 		},
 		13: {
-			name: "Sufficiency",
+			title: "Sufficiency",
 			description: "Points boost their own generation.",
 			cost: new Decimal(5),
 			effect() {
@@ -57,7 +60,7 @@ addLayer("p", {
 			}
 		},
 		21: {
-			name: "Commonality",
+			title: "Commonality",
 			description: "Prestige point gain *1.8.",
 			cost: new Decimal(20),
 			effect() {
@@ -67,7 +70,7 @@ addLayer("p", {
 			}
 		},
 		22: {
-			name: "Elegant Efficiency",
+			title: "Elegant Efficiency",
 			description: "All prestige upgrades *1.01.",
 			cost: new Decimal(75),
 			effect() {
@@ -77,7 +80,7 @@ addLayer("p", {
 			}
 		},
 		23: {
-			name: "Point Power",
+			title: "Point Power",
 			description: "Points boost prestige point generation.",
 			cost: new Decimal(500),
 			effect() {
@@ -88,7 +91,7 @@ addLayer("p", {
 			}
 		},
 		31: {
-			name: "Abundance",
+			title: "Abundance",
 			description: "Prestige point gain ^1.05.",
 			cost: new Decimal(1e45),
 			effect() {
@@ -98,7 +101,7 @@ addLayer("p", {
 			}
 		},
 		32: {
-			name: "Heuristics",
+			title: "Heuristics",
 			description: "Points boost Elegant Efficiency.",
 			cost: new Decimal(1e56),
 			effect() {
@@ -108,7 +111,7 @@ addLayer("p", {
 			}
 		},
 		33: {
-			name: "Vertical Tactics",
+			title: "Vertical Tactics",
 			description: "Total prestige points boost Sufficiency and Point Power.",
 			cost: new Decimal(1e60),
 			effect() {
