@@ -51,7 +51,7 @@ addLayer("p", {
 			description: "Points boost their own generation.",
 			cost: new Decimal(5),
 			effect() {
-				let eff = player.points.times(6).log(10)
+				let eff = player.points.times(6).log(10).plus(1)
 				if (hasUpgrade('p', 22)) {eff.times(upgradeEffect('p', 22))}
 				return eff
 			}
@@ -80,22 +80,42 @@ addLayer("p", {
 			name: "Point Power",
 			description: "Points boost prestige point generation.",
 			cost: new Decimal(500),
-			effect() {return player.points.times(7).log(9)}
+			effect() {
+				let eff = player.points.times(3).log(15).plus(1)
+				if (hasUpgrade('p', 22)) {eff.times(upgradeEffect('p', 22))}
+				if (hasUpgrade('p', 33)) {eff.times(upgradeEffect('p', 33))}
+				return eff
+			}
 		},
 		31: {
 			name: "Abundance",
 			description: "Prestige point gain ^1.05.",
-			cost: new Decimal(1e45)
+			cost: new Decimal(1e45),
+			effect() {
+				let eff = new Decimal(1.05)
+				if (hasUpgrade('p', 22)) {eff.times(upgradeEffect('p', 22))}
+				return eff
+			}
 		},
 		32: {
 			name: "Heuristics",
 			description: "Points boost Elegant Efficiency.",
-			cost: new Decimal(1e56)
+			cost: new Decimal(1e56),
+			effect() {
+				let eff = player.points.times(2).log(20).plus(1)
+				if (hasUpgrade('p', 22)) {eff.times(upgradeEffect('p', 22))}
+				return eff
+			}
 		},
 		33: {
 			name: "Vertical Tactics",
 			description: "Total prestige points boost Sufficiency and Point Power.",
-			cost: new Decimal(1e60)
+			cost: new Decimal(1e60),
+			effect() {
+				let eff = new player.p.total.times(2).log(20).plus(1)
+				if (hasUpgrade('p', 22)) {eff.times(upgradeEffect('p', 22))}
+				return eff
+			}
 		}
 	}
 })
